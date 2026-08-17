@@ -1,33 +1,42 @@
-# Notes
+# File System Notes
 
-Add your notes here as you progress through this module.
+## Five useful Linux commands
 
-## Template
+### 1. `pwd`
+Prints the full path of the current directory so you always know where you are.
 
-When creating a new note, you can use this structure:
+### 2. `ls -lah`
+Lists files and folders in long format, including hidden files, permissions, owners, and readable file sizes.
 
-```markdown
-# Topic Name
+### 3. `cd`
+Moves between directories. Example:
 
-## Key Concepts
-
-- Point 1
-- Point 2
-
-## Commands
-
-`command` - what it does
-
-## Examples
-
-(code examples)
-
-## What I Learned
-
-(your own summary)
+```bash
+cd /var/log
 ```
 
-## Your Notes
+### 4. `find`
+Searches for files and folders by name, type, or other filters. Example:
 
-- [ ] Add your first note
+```bash
+find . -name "*.log"
+```
 
+### 5. `less`
+Lets you open large files and scroll through them safely without printing everything at once. Example:
+
+```bash
+less /var/log/syslog
+```
+
+## Practice examples
+
+```bash
+cd /var/log
+ls -lah
+pwd
+touch test.txt
+mkdir -p projects/demo
+cp test.txt projects/demo/
+mv projects/demo/test.txt projects/demo/backup.txt
+rm projects
