@@ -1,36 +1,72 @@
-# Labs
+# Permissions and Ownership Notes
 
-Document your completed labs here.
+## Create a script
 
-## Template
-
-When documenting a lab, include:
-
-```markdown
-# Lab: [Lab Name]
-
-## Objective
-
-What was the goal?
-
-## Commands Used
-
-(the commands you ran)
-
-## Output
-
-(what happened)
-
-## Challenges
-
-Any issues you hit and how you solved them.
-
-## What I Learned
-
-Key takeaways from this lab.
+```bash
+echo '#!/bin/bash
+echo "Hello DevOps"' > hello.sh
 ```
 
-## Completed Labs
+## Make it executable
 
-- [ ] Add your first lab
+```bash
+chmod +x hello.sh
+```
 
+## Run it
+
+```bash
+./hello.sh
+```
+
+## Change ownership
+
+```bash
+sudo chown root:root hello.sh
+```
+
+## Check permissions
+
+```bash
+ls -l hello.sh
+```
+
+Example output:
+
+```bash
+-rwxr-xr-x 1 root root 32 Nov 29 10:00 hello.sh
+```
+
+## Permission breakdown
+
+- `rwx` for owner means read, write, execute
+- `r-x` for group means read and execute
+- `r-x` for others means read and execute
+
+## Challenge command
+
+Create a file where only you can read and write, while others can only read:
+
+```bash
+touch private-notes.txt
+chmod 644 private-notes.txt
+```
+
+## Extra useful permission examples
+
+Only you can read and write:
+
+```bash
+chmod 600 secret.txt
+```
+
+Everyone can read, write, and execute:
+
+```bash
+chmod 777 test.sh
+```
+
+Owner full access, group read only, others no access:
+
+```bash
+chmod 
