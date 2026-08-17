@@ -1,34 +1,28 @@
-# 02 - Bash Scripting
+# BASH SCRIPTING
 
-Automate everything. Bash scripting turns repetitive tasks into one-click solutions.
+## key learnings:
 
-## What You'll Learn
+* bash has helped me automate repetative tasks
+* tools ive used in my scripts are awk, and sed which help be in proccessing and searching
+* scripts have also helped me in being able to use multiple commands into a singular work flow
+* error handling improves reliablility in my scripts i do this by using deviding with zero
 
-- Variables and data types
-- Conditionals (if/else)
-- Loops (for, while)
-- Functions
-- Input/output handling
-- Error handling
-- Script best practices
+## challenges ive overcome:
 
-## Folder Structure
+one challenge ive had is handling different file types in a script
 
-```
-02-bash/
-├── notes/       # Your notes from lessons
-├── labs/        # Completed lab exercises
-└── projects/    # Hands-on projects
-```
+an example of this ive had is when a file that looked like a normal texted file that failed to open.
 
-## Suggested Projects
+the way i went around this i used:
 
-- [ ] Build a deployment script
-- [ ] Create a health check script for services
-- [ ] Automate log cleanup with retention policies
-- [ ] Build a CLI menu system
+* file filename to check what the real file format is
+* correct commands such as gzip -d, tar -x
 
-## Resources
+## why bash is important in devops
 
-- [Bash Reference Manual](https://www.gnu.org/software/bash/manual/)
-- [ShellCheck](https://www.shellcheck.net/) – Lint your scripts
+* most servers run off of linux mesnig that bash is used daily
+* you can automate deployments, monitoring and backups
+* scripts save time and reduce the amount of manual errors
+* bash works well with tools like CI piplines, docker and cloud platforms
+
+In total bash helps you control systems makes you work faster with fewer errorsBASH SCRIPTING
