@@ -1,58 +1,102 @@
-# 04 - Networking
+ Launching an NGINX Web Server on EC2
 
-Understanding networking is crucial for debugging, security, and infrastructure design.
+This guide shows how to set up an NGINX server on an EC2 instance and link it to your own domain using Cloudflare.
 
-## What You'll Learn
+---
 
-- OSI model and TCP/IP
-- IP addressing and subnets (CIDR)
-- DNS and how domain resolution works
-- HTTP/HTTPS and TLS
-- Load balancers and reverse proxies
-- Firewalls and security groups
-- Common ports and protocols
+## Step 1: Get a domain
 
-## Folder Structure
+Buy a domain through Cloudflare  
+Most domains cost between $5 and $10 per year
 
-```
-04-networking/
-├── notes/       # Your notes from lessons
-├── labs/        # Completed lab exercises
-└── projects/    # Hands-on projects
-```
+---
 
-## Suggested Projects
+## Step 2: Create your EC2 instance
 
-- [ ] Set up a local DNS server
-- [ ] Configure nginx as a reverse proxy
-- [ ] Create a subnet calculator script
-- [ ] Analyse traffic with tcpdump/Wireshark
+Go to AWS and open EC2
 
-## Key Concepts
+Launch a new instance with:
 
-| Port | Protocol | Use |
-|------|----------|-----|
-| 22 | SSH | Secure shell |
-| 80 | HTTP | Web traffic |
-| 443 | HTTPS | Secure web traffic |
-| 53 | DNS | Domain resolution |
-| 3306 | MySQL | Database |
-| 5432 | PostgreSQL | Database |
-| 6379 | Redis | Cache |
+- AMI: Amazon Linux 2023  
+- Instance type: t3.micro  
 
-## Useful Commands
+Set inbound rules:
 
-```bash
-ping <host>           # Test connectivity
-curl -v <url>         # HTTP request with details
-dig <domain>          # DNS lookup
-nslookup <domain>     # DNS lookup
-netstat -tuln         # Show listening ports
-ss -tuln              # Show listening ports (modern)
-traceroute <host>     # Trace network path
-```
+- Port 22 (SSH) restricted to your IP  
+- Port 80 (HTTP) open to all  
+- Port 443 (HTTPS) open to all  
 
-## Resources
+Launch the instance and wait until it is running
 
-- [Subnet Calculator](https://www.subnet-calculator.com/)
-- [DNS Explained](https://howdns.works/)
+---
+
+## Step 3: Copy your public IP
+
+Open your instance details and find the Public IPv4 address  
+You will use this to connect and link your domain
+
+---
+
+## Step 4: Connect using SSH
+
+Run this in your terminal:
+
+ssh -i /path/to/key.pem ec2-user@<EC2_PUBLIC_IP>
+
+---
+
+## Step 5: Install and start NGINX
+
+Run:
+
+sudo yum update -y  
+sudo yum install -y nginx  
+sudo systemctl start nginx  
+sudo systemctl enable nginx  
+
+Check it works by opening your public IP in a browser
+
+---
+
+## Step 6: Point your domain to EC2
+
+Log in to Cloudflare and open DNS settings
+
+Create a record:
+
+- Type: A  
+- Name: your domain or www  
+- Value: your EC2 public IP  
+
+Save the record
+
+---
+
+## Step 7: Check DNS
+
+Run:
+
+nslookup yourdomain.com
+
+You should see your EC2 public IP
+
+---
+
+## Step 8: Update your web page
+
+Edit the default page:
+
+sudo nano /usr/share/nginx/html/index.html
+
+Restart NGINX:
+
+sudo systemctl restart nginx
+
+---
+
+## Step 9: Test your site
+
+Open your domain in a browser  
+You should now see your NGINX page live
+
+---
